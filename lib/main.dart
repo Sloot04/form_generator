@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:form_generator/pages/form_generator_page.dart';
+import 'package:form_generator/pages/form_page.dart';
+import 'package:form_generator/pages/main_page.dart';
  
 void main() => runApp(const MyApp());
  
@@ -10,14 +13,12 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Generador de formularios',
-      home: Scaffold(
-        appBar: AppBar(
-          title:const Text('Cursos Arbolar'),
-        ),
-        body: const Center(
-          child:  Text('Cursos Arbolar'),
-        ),
-      ),
+      initialRoute: '/',
+      routes: {
+        '/': (_)=> const MainPage(),
+        '/form_generator': (_)=> const FormGeneratorPage(),
+        '/form': (_)=> const FormPage(),
+      },
     );
   }
 }
