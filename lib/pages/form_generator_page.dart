@@ -9,9 +9,11 @@ class FormGeneratorPage extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Generar evento'),
       ),
-      body: const Center(
-        child: Text('Generator'),
-      ),
+      body: Column(
+        children: const [
+          
+        ],
+      )
     );
   }
 }

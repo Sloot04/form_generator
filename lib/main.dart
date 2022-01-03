@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:form_generator/bloc/card_bloc.dart';
+
 import 'package:form_generator/pages/form_generator_page.dart';
 import 'package:form_generator/pages/form_page.dart';
 import 'package:form_generator/pages/main_page.dart';
@@ -10,15 +13,18 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Generador de formularios',
-      initialRoute: '/',
-      routes: {
-        '/': (_)=> const MainPage(),
-        '/form_generator': (_)=> const FormGeneratorPage(),
-        '/form': (_)=> const FormPage(),
-      },
+    return MultiBlocProvider(
+      providers: [BlocProvider(create: (_)=>CardBloc())],
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'Generador de formularios',
+        initialRoute: '/',
+        routes: {
+          '/': (_)=> const MainPage(),
+          '/form_generator': (_)=> const FormGeneratorPage(),
+          '/form': (_)=> const FormPage(),
+        },
+      ),
     );
   }
 }
