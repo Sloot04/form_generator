@@ -12,15 +12,11 @@ class FormCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      //color: Colors.grey.shade200,
       elevation: 10,
-     // margin: const EdgeInsets.all(10),
       child: Container(
         padding: const EdgeInsets.all(20),
-        width: 200,
-        height: 150,
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+         mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
               name,
