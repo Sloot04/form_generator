@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:form_generator/Widgets/text_form_custom.dart';
 import 'package:form_generator/bloc/card_bloc.dart';
 import 'package:form_generator/models/course_model.dart';
 import 'package:form_generator/models/dataform_model.dart';
@@ -15,12 +16,14 @@ class _FormGeneratorPageState extends State<FormGeneratorPage> {
   final _formKey = GlobalKey<FormState>();
   TextEditingController nameCtr = TextEditingController();
   TextEditingController dateCtr = TextEditingController();
+  TextEditingController descriptionCtr = TextEditingController();
   bool isCheckedName = true;
 
   @override
   void dispose() {
     nameCtr.dispose();
     dateCtr.dispose();
+    descriptionCtr.dispose();
     super.dispose();
   }
 
@@ -33,21 +36,27 @@ class _FormGeneratorPageState extends State<FormGeneratorPage> {
       body: Column(
         children: [
           Container(
-            padding: const EdgeInsets.all(30),
+            padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 70),
             child: Form(
                 key: _formKey,
                 child: Column(
                   children: [
-                    TextFormField(
-                      controller: nameCtr,
-                      decoration:
-                          const InputDecoration(labelText: 'Nombre del evento'),
-                    ),
-                    TextFormField(
+                    TextFormCustom(
+                        controller: nameCtr, labelText: 'Nombre del evento'),
+                    const SizedBox(height: 10),
+                    TextFormCustom(
                       controller: dateCtr,
-                      decoration:
-                          const InputDecoration(labelText: 'Fecha del evento'),
+                      labelText: 'Fecha del evento',
+                      icon: Icons.date_range,
                     ),
+                    const SizedBox(height: 10),
+                    TextFormCustom(
+                      controller: descriptionCtr,
+                      labelText: 'Descripción',
+                      line: 8,
+                      icon: Icons.description,
+                    ),
+                    const SizedBox(height: 10),
                     CheckboxListTile(
                         title: const Text('Nombre'),
                         value: isCheckedName,
@@ -56,6 +65,7 @@ class _FormGeneratorPageState extends State<FormGeneratorPage> {
                             isCheckedName = value!;
                           });
                         }),
+                    const SizedBox(height: 10),
                   ],
                 )),
           )
@@ -72,6 +82,7 @@ class _FormGeneratorPageState extends State<FormGeneratorPage> {
                 AddCourseEvent(Course(
                     name: nameCtr.text,
                     date: dateCtr.text,
+                    description: descriptionCtr.text,
                     inscriptions: [],
                     form: DataForm(name: isCheckedName))));
             _formKey.currentState!.reset();
