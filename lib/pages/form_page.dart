@@ -42,6 +42,14 @@ class _FormPageState extends State<FormPage> {
               Center(
                   child: Text(state.courses.single.date,
                       style: const TextStyle(fontSize: 18))),
+              state.courses.last.description!.isEmpty ?
+             const SizedBox(height: 20,)
+             : Center(child: Column(
+               children: [
+                 Text(state.courses.last.description!),
+                 const SizedBox(height: 20,)
+               ],
+             ),),
               Form(
                   key: _formKey,
                   child: Column(
