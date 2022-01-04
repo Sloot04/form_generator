@@ -12,10 +12,10 @@ class CardBloc extends Bloc<CardEvent, CardState> {
     });
   }
 
-  @override
+ /*  @override
   void onTransition(Transition<CardEvent, CardState> transition) {
     super.onTransition(transition);
     // ignore: avoid_print
     print(transition.currentState.courses.length);
-  }
+  } */
 }

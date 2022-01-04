@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:form_generator/Widgets/card.dart';
 import 'package:form_generator/bloc/card_bloc.dart';
-import 'package:form_generator/models/course_model.dart';
 
 class MainPage extends StatelessWidget {
   const MainPage({Key? key}) : super(key: key);
@@ -31,6 +30,15 @@ class MainPage extends StatelessWidget {
         title: const Text('Cursos Arbolar'),
         centerTitle: true,
         elevation: 3,
+        actions: [
+          ElevatedButton.icon(
+            onPressed: () {
+              Navigator.pushNamed(context, '/form_generator');
+            },
+            icon: const Icon(Icons.add_outlined),
+            label: const Text('Agregar evento'),
+          )
+        ],
       ),
       body: BlocBuilder<CardBloc, CardState>(
         builder: (context, state) {
@@ -70,17 +78,6 @@ class MainPage extends StatelessWidget {
           );
         },
       ),
-      floatingActionButton: FloatingActionButton(
-          tooltip: 'Agregar Evento',
-          child: const Icon(
-            Icons.add,
-            size: 40,
-          ),
-          onPressed: () {
-            BlocProvider.of<CardBloc>(context, listen: false).add(
-                AddCourseEvent(Course(
-                    name: "Apicultura", date: "21-5-2022", inscriptions: [])));
-          }),
     );
   }
 }
