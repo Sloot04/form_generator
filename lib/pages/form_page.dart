@@ -61,7 +61,7 @@ class _FormPageState extends State<FormPage> {
                                   const InputDecoration(labelText: 'Nombre'),
                             )
                           : const SizedBox(
-                              height: 10,
+                              height: 1,
                             ),
                     ],
                   )),

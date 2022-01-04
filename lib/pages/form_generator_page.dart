@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:form_generator/Widgets/checkbox_custom.dart';
 import 'package:form_generator/Widgets/text_form_custom.dart';
 import 'package:form_generator/bloc/card_bloc.dart';
 import 'package:form_generator/models/course_model.dart';
@@ -57,14 +58,10 @@ class _FormGeneratorPageState extends State<FormGeneratorPage> {
                       icon: Icons.description,
                     ),
                     const SizedBox(height: 10),
-                    CheckboxListTile(
-                        title: const Text('Nombre'),
-                        value: isCheckedName,
-                        onChanged: (value) {
-                          setState(() {
-                            isCheckedName = value!;
-                          });
-                        }),
+                    CheckBoxCustom(
+                      isChecked: isCheckedName,
+                      title: 'Nombre',
+                    ),
                     const SizedBox(height: 10),
                   ],
                 )),
