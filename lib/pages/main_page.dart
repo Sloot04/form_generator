@@ -50,7 +50,7 @@ class MainPage extends StatelessWidget {
             children: [
               ...state.courses.map(
                 (e) => InkWell(
-                  onTap: () => Navigator.pushNamed(context, '/form'),
+                  onTap: () => Navigator.pushNamed(context, '/detail'),
                   child: Stack(
                       alignment: AlignmentDirectional.bottomEnd,
                       children: [

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:form_generator/bloc/card_bloc.dart';
 import 'package:form_generator/models/course_model.dart';
+import 'package:form_generator/models/dataform_model.dart';
 
 class FormGeneratorPage extends StatefulWidget {
   const FormGeneratorPage({Key? key}) : super(key: key);
@@ -14,6 +15,7 @@ class _FormGeneratorPageState extends State<FormGeneratorPage> {
   final _formKey = GlobalKey<FormState>();
   TextEditingController nameCtr = TextEditingController();
   TextEditingController dateCtr = TextEditingController();
+  bool isCheckedName = true;
 
   @override
   void dispose() {
@@ -45,7 +47,15 @@ class _FormGeneratorPageState extends State<FormGeneratorPage> {
                       controller: dateCtr,
                       decoration:
                           const InputDecoration(labelText: 'Fecha del evento'),
-                    )
+                    ),
+                    CheckboxListTile(
+                        title: const Text('Nombre'),
+                        value: isCheckedName,
+                        onChanged: (value) {
+                          setState(() {
+                            isCheckedName = value!;
+                          });
+                        }),
                   ],
                 )),
           )
@@ -60,9 +70,12 @@ class _FormGeneratorPageState extends State<FormGeneratorPage> {
           onPressed: () {
             BlocProvider.of<CardBloc>(context, listen: false).add(
                 AddCourseEvent(Course(
-                    name: nameCtr.text, date: dateCtr.text, inscriptions: [])));
+                    name: nameCtr.text,
+                    date: dateCtr.text,
+                    inscriptions: [],
+                    form: DataForm(name: isCheckedName))));
             _formKey.currentState!.reset();
-            Navigator.pushNamed(context, '/');
+            Navigator.pushNamed(context, '/form');
           }),
     );
   }
