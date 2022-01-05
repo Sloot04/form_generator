@@ -1,13 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:form_generator/bloc/card_bloc.dart';
+import 'package:form_generator/bloc/observer.dart';
 import 'package:form_generator/pages/detail_form.dart';
 
 import 'package:form_generator/pages/form_generator_page.dart';
 import 'package:form_generator/pages/form_page.dart';
 import 'package:form_generator/pages/main_page.dart';
 
-void main() => runApp(const MyApp());
+void main() {
+  BlocOverrides.runZoned(() => runApp(const MyApp()),
+   blocObserver: StateObserver()
+  );
+
+}
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
