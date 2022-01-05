@@ -1,6 +1,6 @@
 class DataForm {
   final bool name;
-  final bool? lastName;
+  final bool lastName;
 
-  DataForm({required this.name, this.lastName});
+  DataForm({required this.name,required this.lastName});
 }
