@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:form_generator/Widgets/text_form_custom.dart';
 import 'package:form_generator/bloc/card_bloc.dart';
 
 class FormPage extends StatefulWidget {
@@ -12,6 +13,7 @@ class FormPage extends StatefulWidget {
 class _FormPageState extends State<FormPage> {
   final _formKey = GlobalKey<FormState>();
   TextEditingController name = TextEditingController();
+  TextEditingController lastname = TextEditingController();
   @override
   void dispose() {
     name.dispose();
@@ -31,10 +33,10 @@ class _FormPageState extends State<FormPage> {
                   child: Text(
                 state.courses.last.name,
                 style:
-                    const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                    const TextStyle(fontSize: 35, fontWeight: FontWeight.bold),
               )),
               Container(
-                height: 1,
+                height: 2,
                 width: double.infinity,
                 color: Colors.blue,
               ),
@@ -42,26 +44,49 @@ class _FormPageState extends State<FormPage> {
               Center(
                   child: Text(state.courses.single.date,
                       style: const TextStyle(fontSize: 18))),
-              state.courses.last.description!.isEmpty ?
-             const SizedBox(height: 20,)
-             : Center(child: Column(
-               children: [
-                 Text(state.courses.last.description!),
-                 const SizedBox(height: 20,)
-               ],
-             ),),
+              state.courses.last.description!.isEmpty
+                  ? const SizedBox(
+                      height: 20,
+                    )
+                  : Center(
+                      child: Column(
+                        children: [
+                          const SizedBox(
+                            height: 20,
+                          ),
+                          Text(state.courses.last.description!),
+                          const SizedBox(
+                            height: 20,
+                          )
+                        ],
+                      ),
+                    ),
               Form(
                   key: _formKey,
                   child: Column(
                     children: [
                       state.courses.last.form!.name
-                          ? TextFormField(
-                              controller: name,
-                              decoration:
-                                  const InputDecoration(labelText: 'Nombre'),
+                          ? Column(
+                              children: [
+                                TextFormCustom(
+                                    controller: name, labelText: 'Nombre'),
+                                const SizedBox(height: 10)
+                              ],
                             )
                           : const SizedBox(
-                              height: 1,
+                              width: 10,
+                            ),
+                      state.courses.last.form!.lastName 
+                          ? Column(
+                              children: [
+                                TextFormCustom(
+                                    controller: lastname,
+                                    labelText: 'Apellido'),
+                                const SizedBox(height: 10)
+                              ],
+                            )
+                          : const SizedBox(
+                              width: 10,
                             ),
                     ],
                   )),

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:form_generator/Widgets/checkbox_custom.dart';
 import 'package:form_generator/Widgets/text_form_custom.dart';
 import 'package:form_generator/bloc/card_bloc.dart';
 import 'package:form_generator/models/course_model.dart';
@@ -19,6 +18,7 @@ class _FormGeneratorPageState extends State<FormGeneratorPage> {
   TextEditingController dateCtr = TextEditingController();
   TextEditingController descriptionCtr = TextEditingController();
   bool isCheckedName = true;
+  bool isCheckedLastname = true;
 
   @override
   void dispose() {
@@ -57,12 +57,46 @@ class _FormGeneratorPageState extends State<FormGeneratorPage> {
                       line: 8,
                       icon: Icons.description,
                     ),
-                    const SizedBox(height: 10),
-                    CheckBoxCustom(
-                      isChecked: isCheckedName,
-                      title: 'Nombre',
+                    const SizedBox(height: 20),
+                    Container(
+                      height: 1,
+                      width: double.infinity,
+                      color: Colors.blue,
                     ),
                     const SizedBox(height: 10),
+                    const Text(
+                      'Campos del formulario',
+                      style:
+                          TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                    ),
+                    const SizedBox(height: 20),
+                    Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 50),
+                      child: Column(
+                        children: [
+                          CheckboxListTile(
+                              title: const Text('Nombre'),
+                              tileColor: Colors.blue.shade100,
+                              value: isCheckedName,
+                              onChanged: (value) {
+                                setState(() {
+                                  isCheckedName = value!;
+                                });
+                              }),
+                          const SizedBox(height: 10),
+                          CheckboxListTile(
+                              title: const Text('Apellido'),
+                              tileColor: Colors.blue.shade100,
+                              value: isCheckedLastname,
+                              onChanged: (value) {
+                                setState(() {
+                                  isCheckedLastname = value!;
+                                });
+                              }),
+                          const SizedBox(height: 10),
+                        ],
+                      ),
+                    ),
                   ],
                 )),
           )
@@ -75,13 +109,16 @@ class _FormGeneratorPageState extends State<FormGeneratorPage> {
             size: 40,
           ),
           onPressed: () {
-            BlocProvider.of<CardBloc>(context, listen: false).add(
-                AddCourseEvent(Course(
+            BlocProvider.of<CardBloc>(context, listen: false)
+                .add(AddCourseEvent(Course(
                     name: nameCtr.text,
                     date: dateCtr.text,
                     description: descriptionCtr.text,
                     inscriptions: [],
-                    form: DataForm(name: isCheckedName))));
+                    form: DataForm(
+                      name: isCheckedName,
+                      lastName: isCheckedLastname,
+                    ))));
             _formKey.currentState!.reset();
             Navigator.pushNamed(context, '/form');
           }),

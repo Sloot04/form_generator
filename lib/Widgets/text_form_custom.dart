@@ -6,8 +6,9 @@ class TextFormCustom extends StatefulWidget {
   final IconData? icon;
   final int? line;
 
+
   const TextFormCustom(
-      {required this.controller, required this.labelText, this.icon, this.line, Key? key})
+      {required this.controller, required this.labelText, this.icon, this.line, Key? key,})
       : super(key: key);
 
   @override
@@ -19,6 +20,7 @@ class _TextFormCustomState extends State<TextFormCustom> {
   Widget build(BuildContext context) {
     if (widget.icon != null) {
       return TextFormField(
+        key: widget.key,
         controller: widget.controller,
         maxLines: widget.line,
         decoration: InputDecoration(

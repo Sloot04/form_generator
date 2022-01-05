@@ -21,14 +21,19 @@ class _CheckBoxCustomState extends State<CheckBoxCustom> {
 
   @override
   Widget build(BuildContext context) {
-    return CheckboxListTile(
-        title: Text(widget.title),
-        tileColor: Colors.blue.shade100,
-        value: checked,
-        onChanged: (value) {
-          setState(() {
-            checked = value!;
-          });
-        });
+    return Container(
+      key: widget.key,
+      padding: const EdgeInsets.symmetric(horizontal: 50),
+      child: CheckboxListTile(
+          title: Text(widget.title),
+          tileColor: Colors.blue.shade100,
+       
+          value: checked,
+          onChanged: (value) {
+            setState(() {
+              checked = value!;
+            });
+          }),
+    );
   }
 }
